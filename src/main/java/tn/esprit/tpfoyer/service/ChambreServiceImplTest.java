@@ -41,6 +41,7 @@ public class ChambreServiceImplTest {
 
         // Assert
         assertEquals(2, chambres.size());
+        assertEquals(101L, chambres.get(0).getNumeroChambre());
         verify(chambreRepository, times(1)).findAll();
     }
 
@@ -55,6 +56,7 @@ public class ChambreServiceImplTest {
 
         // Assert
         assertEquals(1L, result.getIdChambre());
+        assertEquals(TypeChambre.SIMPLE, result.getTypeC());
         verify(chambreRepository, times(1)).findById(1L);
     }
 
@@ -93,6 +95,7 @@ public class ChambreServiceImplTest {
 
         // Assert
         assertEquals(2, chambres.size());
+        assertEquals(TypeChambre.SIMPLE, chambres.get(0).getTypeC());
         verify(chambreRepository, times(1)).findAllByTypeC(TypeChambre.SIMPLE);
     }
 
@@ -107,6 +110,7 @@ public class ChambreServiceImplTest {
 
         // Assert
         assertEquals(1L, result.getIdChambre());
+        assertEquals(101L, result.getNumeroChambre());
         verify(chambreRepository, times(1)).trouverChselonEt(123456L);
     }
 }
