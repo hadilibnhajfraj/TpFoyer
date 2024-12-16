@@ -1,6 +1,5 @@
 package tn.esprit.tpfoyer.service;
 
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpfoyer.entity.Reservation;
@@ -8,6 +7,7 @@ import tn.esprit.tpfoyer.repository.ReservationRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -20,7 +20,14 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     public Reservation retrieveReservation(String reservationId) {
-        return reservationRepository.findById(reservationId).get();
+        // Check if the Optional contains a value before accessing it
+        Optional<Reservation> reservationOpt = reservationRepository.findById(reservationId);
+        if (reservationOpt.isPresent()) {
+            return reservationOpt.get();
+        } else {
+            // Handle the case where the reservation is not found
+            throw new RuntimeException("Reservation not found for id: " + reservationId);
+        }
     }
 
     public Reservation addReservation(Reservation r) {
