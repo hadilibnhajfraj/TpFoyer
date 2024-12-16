@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class EtudiantServiceImpl implements IEtudiantService {
 
-
+//Etudiant*******
     EtudiantRepository etudiantRepository;
 
     public List<Etudiant> retrieveAllEtudiants() {
