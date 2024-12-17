@@ -52,6 +52,11 @@ public class ChambreServiceImpl implements IChambreService {
 
     @Override
     public Chambre trouverChambreSelonEtudiant(long cin) {
-        return chambreRepository.trouverChselonEt(cin);
+        Chambre chambre = chambreRepository.trouverChselonEt(cin);
+        if (chambre == null) {
+            throw new EntityNotFoundException("Chambre for student with CIN " + cin + " not found");
+        }
+        return chambre;
     }
+
 }

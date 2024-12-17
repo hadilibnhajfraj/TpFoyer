@@ -13,9 +13,7 @@ public interface IChambreService {
     public void removeChambre(Long chambreId);
     public Chambre modifyChambre(Chambre chambre);
 
-
-    public Chambre trouverChambreSelonEtudiant(long cin);
-
+    public Chambre trouverChambreSelonEtudiant(long Cin);
 
     public List<Chambre> recupererChambresSelonTyp(TypeChambre tc);
 
