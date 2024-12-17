@@ -46,6 +46,6 @@ public class ChambreRestController {
 
     @GetMapping("/trouver-chambre-selon-etudiant/{cin}")
     public Chambre trouverChSelonEt(@PathVariable("cin") long cin) {
-        return chambreService.trouverchambreSelonEtudiant(cin);
+        return chambreService.trouverChambreSelonEtudiant(cin);
     }
 }

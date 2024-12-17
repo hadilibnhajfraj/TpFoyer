@@ -1,6 +1,6 @@
 package tn.esprit.tpfoyer.service;
 
-
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,68 +17,46 @@ public class ChambreServiceImpl implements IChambreService {
 
     ChambreRepository chambreRepository;
 
+    @Override
     public List<Chambre> retrieveAllChambres() {
-        log.info("In Methodo retrieveAllChambres : ");
-        List<Chambre> listC = chambreRepository.findAll();
+        log.info("In Method retrieveAllChambres : ");
         log.info("Out of retrieveAllChambres : ");
-
-        return listC;
+        return chambreRepository.findAll();
     }
 
+    @Override
     public Chambre retrieveChambre(Long chambreId) {
-        Chambre c = chambreRepository.findById(chambreId).get();
-        return c;
+        return chambreRepository.findById(chambreId)
+                .orElseThrow(() -> new EntityNotFoundException("Bloc with ID " + chambreId + " not found"));
     }
 
+    @Override
     public Chambre addChambre(Chambre c) {
-        Chambre chambre = chambreRepository.save(c);
-        return chambre;
+        return chambreRepository.save(c);
     }
 
+    @Override
     public Chambre modifyChambre(Chambre c) {
-        Chambre chambre = chambreRepository.save(c);
-        return c;
+        return chambreRepository.save(c);
     }
 
+    @Override
     public void removeChambre(Long chambreId) {
         chambreRepository.deleteById(chambreId);
     }
 
-
-
-
-
-
-
-    public List<Chambre> recupererChambresSelonTyp(TypeChambre tc)
-    {
+    @Override
+    public List<Chambre> recupererChambresSelonTyp(TypeChambre tc) {
         return chambreRepository.findAllByTypeC(tc);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public Chambre trouverchambreSelonEtudiant(long cin) {
-       //
-
-        return chambreRepository.trouverChselonEt(cin);
+    @Override
+    public Chambre trouverChambreSelonEtudiant(long cin) {
+        Chambre chambre = chambreRepository.trouverChselonEt(cin);
+        if (chambre == null) {
+            throw new EntityNotFoundException("Chambre for student with CIN " + cin + " not found");
+        }
+        return chambre;
     }
+
 }
