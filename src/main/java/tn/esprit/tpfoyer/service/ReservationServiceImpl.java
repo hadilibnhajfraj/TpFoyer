@@ -7,6 +7,7 @@ import tn.esprit.tpfoyer.repository.ReservationRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -25,8 +26,8 @@ public class ReservationServiceImpl implements IReservationService {
         if (reservationOpt.isPresent()) {
             return reservationOpt.get();
         } else {
-            // Handle the case where the reservation is not found
-            throw new RuntimeException("Reservation not found for id: " + reservationId);
+            // Throw NoSuchElementException instead of a generic RuntimeException
+            throw new NoSuchElementException("Reservation not found for id: " + reservationId);
         }
     }
 
