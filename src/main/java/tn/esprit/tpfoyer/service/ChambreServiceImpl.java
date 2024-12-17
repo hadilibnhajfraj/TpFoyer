@@ -37,6 +37,11 @@ public class ChambreServiceImpl implements IChambreService {
         return chambreRepository.save(c);
     }
 
+    @Override
+    public Chambre trouverChambreSelonEtudiant(long cin) {
+        return chambreRepository.trouverChselonEt(cin);
+    }
+
     public void removeChambre(Long chambreId) {
         chambreRepository.deleteById(chambreId);
     }
@@ -45,7 +50,5 @@ public class ChambreServiceImpl implements IChambreService {
         return chambreRepository.findAllByTypeC(tc);
     }
 
-    public Chambre trouverchambreSelonEtudiant(long cin) {
-        return chambreRepository.trouverChselonEt(cin);
-    }
+
 }
