@@ -51,7 +51,7 @@ public class ChambreServiceImpl implements IChambreService {
     }
 
     @Override
-    public Chambre trouverchambreSelonEtudiant(long cin) {
+    public Chambre trouverChambreSelonEtudiant(long cin) {
         return chambreRepository.trouverChselonEt(cin);
     }
 }

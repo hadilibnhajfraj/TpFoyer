@@ -97,7 +97,7 @@ public class ChambreServiceImplTest {
         when(chambreRepository.trouverChselonEt(123456L)).thenReturn(chambre);
 
         // Act
-        chambreService.trouverchambreSelonEtudiant(123456L);
+        chambreService.trouverChambreSelonEtudiant(123456L);
 
         // Verify
         verify(chambreRepository, times(1)).trouverChselonEt(123456L);
