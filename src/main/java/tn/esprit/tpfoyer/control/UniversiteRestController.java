@@ -13,25 +13,21 @@ import java.util.List;
 public class UniversiteRestController {
 
     IUniversiteService universiteService;
+
     @GetMapping("/retrieve-all-universites")
     public List<Universite> getUniversites() {
-        List<Universite> listUniversites = universiteService.retrieveAllUniversites();
-        return listUniversites;
+        return universiteService.retrieveAllUniversites();
     }
 
     @GetMapping("/retrieve-universite/{universite-id}")
     public Universite retrieveUniversite(@PathVariable("universite-id") Long uId) {
-        Universite universite = universiteService.retrieveUniversite(uId);
-        return universite;
+        return universiteService.retrieveUniversite(uId);
     }
-
 
     @PostMapping("/add-universite")
     public Universite addUniversite(@RequestBody Universite u) {
-        Universite universite = universiteService.addUniversite(u);
-        return universite;
+        return universiteService.addUniversite(u);
     }
-
 
     @DeleteMapping("/remove-universite/{universite-id}")
     public void removeUniversite(@PathVariable("universite-id") Long uId) {
@@ -41,8 +37,6 @@ public class UniversiteRestController {
     // http://localhost:8089/tpfoyer/universite/modify-universite
     @PutMapping("/modify-universite")
     public Universite modifyUniversite(@RequestBody Universite u) {
-        Universite universite = universiteService.modifyUniversite(u);
-        return universite;
+        return universiteService.modifyUniversite(u);
     }
-
 }

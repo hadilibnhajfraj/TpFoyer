@@ -1,6 +1,5 @@
 package tn.esprit.tpfoyer.service;
 
-
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,60 +24,34 @@ public class ChambreServiceImpl implements IChambreService {
         return chambreRepository.findAll();
     }
 
+    @Override
     public Chambre retrieveChambre(Long chambreId) {
-        Chambre c = chambreRepository.findById(chambreId) .orElseThrow(() -> new EntityNotFoundException("Bloc with ID " + chambreId + " not found"));
-        return c;
+        return chambreRepository.findById(chambreId)
+                .orElseThrow(() -> new EntityNotFoundException("Bloc with ID " + chambreId + " not found"));
     }
 
+    @Override
     public Chambre addChambre(Chambre c) {
-        Chambre chambre = chambreRepository.save(c);
-        return chambre;
+        return chambreRepository.save(c);
     }
 
+    @Override
     public Chambre modifyChambre(Chambre c) {
-        Chambre chambre = chambreRepository.save(c);
-        return c;
+        return chambreRepository.save(c);
     }
 
+    @Override
     public void removeChambre(Long chambreId) {
         chambreRepository.deleteById(chambreId);
     }
 
-
-
-
-
-
-
-    public List<Chambre> recupererChambresSelonTyp(TypeChambre tc)
-    {
+    @Override
+    public List<Chambre> recupererChambresSelonTyp(TypeChambre tc) {
         return chambreRepository.findAllByTypeC(tc);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
     public Chambre trouverchambreSelonEtudiant(long cin) {
-       //
-
         return chambreRepository.trouverChselonEt(cin);
     }
 }
