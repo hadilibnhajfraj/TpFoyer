@@ -13,8 +13,7 @@ public interface IChambreService {
     public void removeChambre(Long chambreId);
     public Chambre modifyChambre(Chambre chambre);
 
-    // Here we will add later methods calling keywords and methods calling JPQL
-    public Chambre trouverchambreSelonEtudiant(long Cin);
+    public Chambre trouverChambreSelonEtudiant(long Cin);
 
     public List<Chambre> recupererChambresSelonTyp(TypeChambre tc);
 
