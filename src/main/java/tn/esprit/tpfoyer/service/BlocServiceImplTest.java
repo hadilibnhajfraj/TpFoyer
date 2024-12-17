@@ -101,12 +101,21 @@ class BlocServiceImplTest {
 
     @Test
     void testRemoveBloc() {
-        // Act
+        // Arrange: Mock the repository to return an Optional of the Bloc to be deleted
+        Bloc bloc = new Bloc(1L, BLOC_A, 100, null, null);
+        when(blocRepository.findById(1L)).thenReturn(Optional.of(bloc)); // Mock findById to return the Bloc
+
+        // Act: Call the remove method
         blocService.removeBloc(1L);
 
         // Verify repository interaction
         verify(blocRepository, times(1)).deleteById(1L);
+
+        // Log output for verification
+        logger.info("Removed Bloc with ID 1");
     }
+
+
 
     @Test
     void testRetrieveBlocsSelonCapacite() {

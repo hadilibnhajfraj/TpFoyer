@@ -10,6 +10,7 @@ import tn.esprit.tpfoyer.repository.BlocRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -18,15 +19,23 @@ public class BlocServiceImpl implements IBlocService {
 
     private final BlocRepository blocRepository;
 
-    @Scheduled(fixedRate = 30000) // millisecondes
-    public List<Bloc> retrieveAllBlocs() {
+    @Scheduled(fixedRate = 30000) // Executes every 30 seconds
+    public void logAllBlocs() {
         List<Bloc> listB = blocRepository.findAll();
         log.info("Taille totale des blocs : {}", listB.size());
         for (Bloc b : listB) {
             log.info("Bloc : {}", b);
         }
+    }
+
+    @Override
+    public List<Bloc> retrieveAllBlocs() {
+        List<Bloc> listB = blocRepository.findAll();
+        log.info("Taille totale des blocs : {}", listB.size());
         return listB;
     }
+
+
 
     @Transactional
     public List<Bloc> retrieveBlocsSelonCapacite(long capacite) {
@@ -64,14 +73,15 @@ public class BlocServiceImpl implements IBlocService {
     }
 
     public void removeBloc(Long blocId) {
-        if (blocId == null) {
-            throw new IllegalArgumentException("L'ID du bloc à supprimer ne doit pas être null");
-        }
-        if (!blocRepository.existsById(blocId)) {
+        Optional<Bloc> blocOpt = blocRepository.findById(blocId);
+        System.out.println("Bloc found: " + blocOpt.isPresent());  // Add logging
+        if (blocOpt.isPresent()) {
+            blocRepository.deleteById(blocId);
+        } else {
             throw new IllegalArgumentException("Bloc avec l'ID " + blocId + " non trouvé");
         }
-        blocRepository.deleteById(blocId);
     }
+
 
     public List<Bloc> trouverBlocsSansFoyer() {
         return blocRepository.findAllByFoyerIsNull();

@@ -1,6 +1,5 @@
 package tn.esprit.tpfoyer.service;
 
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpfoyer.entity.Universite;
@@ -12,14 +11,16 @@ import java.util.List;
 @AllArgsConstructor
 public class UniversiteServiceImpl implements IUniversiteService {
 
-    UniversiteRepository universiteRepository;
+    private final UniversiteRepository universiteRepository;
 
     public List<Universite> retrieveAllUniversites() {
         return universiteRepository.findAll();
     }
 
     public Universite retrieveUniversite(Long universiteId) {
-        return universiteRepository.findById(universiteId).get();
+        // Utilisation de la méthode ifPresentOrElse pour gérer le cas où l'objet n'est pas présent
+        return universiteRepository.findById(universiteId)
+                .orElse(null);  // Remplacer par null ou une valeur par défaut selon le cas
     }
 
     public Universite addUniversite(Universite u) {
