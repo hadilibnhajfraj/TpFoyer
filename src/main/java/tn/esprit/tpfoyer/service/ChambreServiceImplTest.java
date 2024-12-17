@@ -103,7 +103,7 @@ public class ChambreServiceImplTest {
         when(chambreRepository.trouverChselonEt(123456L)).thenReturn(chambre);
 
         // Act
-        Chambre result = chambreService.trouverchambreSelonEtudiant(123456L);
+        Chambre result = chambreService.trouverChambreSelonEtudiant(123456L);
 
         // Assert
         assertEquals(1L, result.getIdChambre());
