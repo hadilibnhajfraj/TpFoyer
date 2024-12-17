@@ -74,13 +74,15 @@ public class BlocServiceImpl implements IBlocService {
 
     public void removeBloc(Long blocId) {
         Optional<Bloc> blocOpt = blocRepository.findById(blocId);
-        System.out.println("Bloc found: " + blocOpt.isPresent());  // Add logging
+        log.info("Bloc found: {}", blocOpt.isPresent()); // Use logger instead of System.out.println
         if (blocOpt.isPresent()) {
             blocRepository.deleteById(blocId);
+            log.info("Bloc with ID {} has been removed successfully.", blocId);
         } else {
             throw new IllegalArgumentException("Bloc avec l'ID " + blocId + " non trouvé");
         }
     }
+
 
 
     public List<Bloc> trouverBlocsSansFoyer() {
