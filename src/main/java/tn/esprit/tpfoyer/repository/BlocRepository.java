@@ -26,5 +26,8 @@ public interface BlocRepository extends JpaRepository<Bloc, Long> {
 
  // List des blocs non affectés à aucun foyer :
  List<Bloc> findAllByFoyerIsNull();
+ List<Bloc> findByNomBlocAndCapaciteBloc(String nom, long capacite);
+
+ List<Bloc> findByFoyerIsNull();
 
 }

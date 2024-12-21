@@ -7,25 +7,25 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.repository.BlocRepository;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 @AllArgsConstructor
-@Slf4j // Simple Logging Façade for Java
+@Slf4j
 public class BlocServiceImpl implements IBlocService {
+
+    private static final Logger logger = LoggerFactory.getLogger(BlocServiceImpl.class); // Déclarer le logger ici
 
     private final BlocRepository blocRepository;
 
+    // Exemple de méthode avec un log
     @Scheduled(fixedRate = 30000) // Executes every 30 seconds
     public void logAllBlocs() {
         List<Bloc> listB = blocRepository.findAll();
-        log.info("Taille totale des blocs : {}", listB.size());
-        for (Bloc b : listB) {
-            log.info("Bloc : {}", b);
-        }
+        logger.info("Taille totale des blocs : {}", listB.size()); // Use the logger here
+        listB.forEach(b -> logger.info("Bloc : {}", b)); // Log each bloc
     }
 
     @Override
@@ -35,18 +35,11 @@ public class BlocServiceImpl implements IBlocService {
         return listB;
     }
 
-
-
     @Transactional
     public List<Bloc> retrieveBlocsSelonCapacite(long capacite) {
-        List<Bloc> listB = blocRepository.findAll();
-        List<Bloc> listBselonC = new ArrayList<>();
-        for (Bloc b : listB) {
-            if (b.getCapaciteBloc() >= capacite) {
-                listBselonC.add(b);
-            }
-        }
-        return listBselonC;
+        return blocRepository.findAll().stream()
+                .filter(b -> b.getCapaciteBloc() >= capacite)
+                .toList();
     }
 
     @Transactional
@@ -73,26 +66,22 @@ public class BlocServiceImpl implements IBlocService {
     }
 
     public void removeBloc(Long blocId) {
-        Optional<Bloc> blocOpt = blocRepository.findById(blocId);
-        log.info("Bloc found: {}", blocOpt.isPresent()); // Use logger instead of System.out.println
-        if (blocOpt.isPresent()) {
-            blocRepository.deleteById(blocId);
-            log.info("Bloc with ID {} has been removed successfully.", blocId);
-        } else {
-            throw new IllegalArgumentException("Bloc avec l'ID " + blocId + " non trouvé");
-        }
-    }
+        // Use blocId directly for retrieval and deletion
+        Bloc bloc = blocRepository.findById(blocId)
+                .orElseThrow(() -> new IllegalArgumentException("Bloc avec l'ID " + blocId + " non trouvé"));
 
+        blocRepository.deleteById(bloc.getIdBloc());
+        log.info("Bloc with ID {} has been removed successfully.", blocId);
+    }
 
 
     public List<Bloc> trouverBlocsSansFoyer() {
-        return blocRepository.findAllByFoyerIsNull();
+        return blocRepository.findByFoyerIsNull();
     }
 
-    public List<Bloc> trouverBlocsParNomEtCap(String nomBloc, long capacite) {
-        if (nomBloc == null || nomBloc.trim().isEmpty()) {
-            throw new IllegalArgumentException("Le nom du bloc ne doit pas être null ou vide");
-        }
-        return blocRepository.findAllByNomBlocAndCapaciteBloc(nomBloc, capacite);
+
+    public List<Bloc> trouverBlocsParNomEtCap(String nomBloc, long capaciteBloc) {
+        return blocRepository.findByNomBlocAndCapaciteBloc(nomBloc, capaciteBloc);
     }
+
 }

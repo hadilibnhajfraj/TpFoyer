@@ -1,4 +1,4 @@
-package tn.esprit.tpfoyer.service;
+package tn.esprit.tpfoyer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import tn.esprit.tpfoyer.entity.Chambre;
 import tn.esprit.tpfoyer.entity.TypeChambre;
 import tn.esprit.tpfoyer.repository.ChambreRepository;
+import tn.esprit.tpfoyer.service.ChambreServiceImpl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
-public class ChambreServiceImplTest {
+ class ChambreServiceImplTest {
 
     private static final Logger logger = LoggerFactory.getLogger(ChambreServiceImplTest.class);
 
@@ -33,7 +34,7 @@ public class ChambreServiceImplTest {
     }
 
     @Test
-    public void testRetrieveAllChambres() {
+     void testRetrieveAllChambres() {
         // Arrange
         Chambre chambre1 = new Chambre(1L, 101L, TypeChambre.SIMPLE, null, null);
         Chambre chambre2 = new Chambre(2L, 102L, TypeChambre.DOUBLE, null, null);
@@ -50,7 +51,7 @@ public class ChambreServiceImplTest {
     }
 
     @Test
-    public void testRetrieveChambre() {
+     void testRetrieveChambre() {
         // Arrange
         Chambre chambre = new Chambre(1L, 101L, TypeChambre.SIMPLE, null, null);
         when(chambreRepository.findById(1L)).thenReturn(Optional.of(chambre));
@@ -66,7 +67,7 @@ public class ChambreServiceImplTest {
     }
 
     @Test
-    public void testAddChambre() {
+     void testAddChambre() {
         // Arrange
         Chambre chambre = new Chambre(1L, 101L, TypeChambre.SIMPLE, null, null);
         when(chambreRepository.save(chambre)).thenReturn(chambre);
@@ -82,7 +83,7 @@ public class ChambreServiceImplTest {
     }
 
     @Test
-    public void testRemoveChambre() {
+     void testRemoveChambre() {
         // Act
         chambreService.removeChambre(1L);
 
@@ -91,7 +92,7 @@ public class ChambreServiceImplTest {
     }
 
     @Test
-    public void testRecupererChambresSelonTyp() {
+     void testRecupererChambresSelonTyp() {
         // Arrange
         Chambre chambre1 = new Chambre(1L, 101L, TypeChambre.SIMPLE, null, null);
         Chambre chambre2 = new Chambre(2L, 102L, TypeChambre.SIMPLE, null, null);
@@ -108,7 +109,7 @@ public class ChambreServiceImplTest {
     }
 
     @Test
-    public void testTrouverChambreSelonEtudiant() {
+     void testTrouverChambreSelonEtudiant() {
         // Arrange
         Chambre chambre = new Chambre(1L, 101L, TypeChambre.SIMPLE, null, null);
         when(chambreRepository.trouverChselonEt(123456L)).thenReturn(chambre);
