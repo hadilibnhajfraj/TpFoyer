@@ -1,4 +1,4 @@
-package tn.esprit.tpfoyer.service;
+package tn.esprit.tpfoyer;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 import tn.esprit.tpfoyer.entity.Chambre;
 import tn.esprit.tpfoyer.entity.TypeChambre;
 import tn.esprit.tpfoyer.repository.ChambreRepository;
+import tn.esprit.tpfoyer.service.ChambreServiceImpl;
 
 import java.util.Arrays;
 import java.util.List;
