@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 @AllArgsConstructor
 @Slf4j
 public class BlocServiceImpl implements IBlocService {
-
+//ok
     private static final Logger logger = LoggerFactory.getLogger(BlocServiceImpl.class); // Déclarer le logger ici
 
     private final BlocRepository blocRepository;
