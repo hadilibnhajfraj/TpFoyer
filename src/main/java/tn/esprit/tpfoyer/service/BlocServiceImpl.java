@@ -3,7 +3,6 @@ package tn.esprit.tpfoyer.service;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.repository.BlocRepository;
@@ -16,17 +15,17 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class BlocServiceImpl implements IBlocService {
 //ok
-    private static final Logger logger = LoggerFactory.getLogger(BlocServiceImpl.class); // Déclarer le logger ici
+   // private static final Logger logger = LoggerFactory.getLogger(BlocServiceImpl.class); // Déclarer le logger ici
 
     private final BlocRepository blocRepository;
 
     // Exemple de méthode avec un log
-    @Scheduled(fixedRate = 30000) // Executes every 30 seconds
-    public void logAllBlocs() {
-        List<Bloc> listB = blocRepository.findAll();
-        logger.info("Taille totale des blocs : {}", listB.size()); // Use the logger here
-        listB.forEach(b -> logger.info("Bloc : {}", b)); // Log each bloc
-    }
+    //@Scheduled(fixedRate = 30000) // Executes every 30 seconds
+   // public void logAllBlocs() {
+      //  List<Bloc> listB = blocRepository.findAll();
+      //  logger.info("Taille totale des blocs : {}", listB.size()); // Use the logger here
+      //  listB.forEach(b -> logger.info("Bloc : {}", b)); // Log each bloc
+    //}
 
     @Override
     public List<Bloc> retrieveAllBlocs() {
