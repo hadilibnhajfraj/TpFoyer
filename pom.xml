@@ -95,7 +95,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>prepare-agent</goal>  <!-- Prépare l'agent JaCoCo avant d'exécuter les tests -->
+                            <goal>prepare-agent</goal>  
                             <goal>report</goal>         <!-- Génère un rapport de couverture après les tests -->
                         </goals>
                     </execution>
