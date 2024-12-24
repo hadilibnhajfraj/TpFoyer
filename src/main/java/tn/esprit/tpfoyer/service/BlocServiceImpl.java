@@ -21,7 +21,7 @@ public class BlocServiceImpl implements IBlocService {
 
     // Exemple de méthode avec un log
     //@Scheduled(fixedRate = 30000) // Executes every 30 seconds
-   // public void logAllBlocs() {
+   //  {
       //  List<Bloc> listB = blocRepository.findAll();
       //  logger.info("Taille totale des blocs : {}", listB.size()); // Use the logger here
       //  listB.forEach(b -> logger.info("Bloc : {}", b)); // Log each bloc

@@ -87,9 +87,16 @@
             <artifactId>logback-classic</artifactId>
             <version>1.4.12</version>
         </dependency>
+        <!-- Deploy to Nexus -->
 
     </dependencies>
-
+    <distributionManagement>
+        <repository>
+            <id>deploymentRepo</id>
+            <name>Nexus Repository</name>
+            <url>http://localhost:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
     <build>
         <plugins>
             <!-- JaCoCo Plugin for Code Coverage -->
