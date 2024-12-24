@@ -1,4 +1,4 @@
-package tn.esprit.tpfoyer.service;
+package tn.esprit.tpfoyer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +8,7 @@ import org.mockito.MockitoAnnotations;
 import tn.esprit.tpfoyer.entity.Universite;
 
 import tn.esprit.tpfoyer.repository.UniversiteRepository;
+import tn.esprit.tpfoyer.service.UniversiteServiceImpl;
 
 import java.util.Arrays;
 import java.util.List;
