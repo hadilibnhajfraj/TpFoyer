@@ -19,9 +19,9 @@ import java.util.Set;
 
 import static org.mockito.Mockito.*;
 
-public class FoyerServiceTestImpl {
+public class FoyerServiceImplTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(FoyerServiceTestImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(FoyerServiceImplTest.class);
 
     private static final String FOYER_TEST = "Foyer Test";  // Constante utilisée dans le code
     @Mock
