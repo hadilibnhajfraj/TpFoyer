@@ -1,4 +1,4 @@
-package tn.esprit.tpfoyer.service;
+package tn.esprit.tpfoyer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +11,7 @@ import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.entity.Foyer;
 import tn.esprit.tpfoyer.entity.Universite;
 import tn.esprit.tpfoyer.repository.FoyerRepository;
+import tn.esprit.tpfoyer.service.FoyerServiceImpl;
 
 import java.util.HashSet;
 import java.util.Optional;
