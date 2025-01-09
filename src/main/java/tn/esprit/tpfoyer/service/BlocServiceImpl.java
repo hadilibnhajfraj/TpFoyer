@@ -14,18 +14,9 @@ import org.slf4j.LoggerFactory;
 @AllArgsConstructor
 @Slf4j
 public class BlocServiceImpl implements IBlocService {
-//ok
-   // private static final Logger logger = LoggerFactory.getLogger(BlocServiceImpl.class); // Déclarer le logger ici
+
 
     private final BlocRepository blocRepository;
-
-    // Exemple de méthode avec un log
-    //@Scheduled(fixedRate = 30000) // Executes every 30 seconds
-   //  {
-      //  List<Bloc> listB = blocRepository.findAll();
-      //  logger.info("Taille totale des blocs : {}", listB.size()); // Use the logger here
-      //  listB.forEach(b -> logger.info("Bloc : {}", b)); // Log each bloc
-    //}
 
     @Override
     public List<Bloc> retrieveAllBlocs() {
