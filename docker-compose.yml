@@ -20,7 +20,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image: hadilibnhajfraj/backend-spring:1.0.0
+    image: rafik100/backend-spring:1.0.0
     restart: on-failure
     env_file: ./.env
     ports:
