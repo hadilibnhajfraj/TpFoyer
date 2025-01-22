@@ -30,7 +30,7 @@ services:
         "spring.datasource.url": "jdbc:mysql://mysqldb:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}?CreateDatabaseIfNotExist=true",
         "spring.datasource.username": "${MYSQLDB_USER}",
         "spring.datasource.password": "${MYSQLDB_ROOT_PASSWORD}",
-        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect",
+         SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: "org.hibernate.dialect.MySQLDialect"
         "spring.jpa.hibernate.ddl-auto": "update"
       }'
     stdin_open: true
