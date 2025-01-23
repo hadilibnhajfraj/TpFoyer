@@ -1,11 +1,42 @@
-# Étape 1 : Utiliser une image base Java
-FROM openjdk:17-jdk-alpine
+version: '3.8'
 
-# Étape 2 : Définir le répertoire de travail dans le conteneur
-WORKDIR /app
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQLDB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQLDB_DATABASE}
+      - MYSQL_USER=${MYSQLDB_USER}  # N'ajoutez pas ici `root` car c'est déjà défini
+    ports:
+      - "${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}"
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
-# Étape 3 : Copier le fichier JAR généré dans le conteneur
-COPY target/tp-foyer-*.jar app.jar
+  app:
+    depends_on:
+      - mysqldb
+    image: meriembensalem/backend-spring:1.0.0
+    restart: on-failure
+    env_file: ./.env
+    ports:
+      - "${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url": "jdbc:mysql://mysqldb:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}?createDatabaseIfNotExist=true",
+        "spring.datasource.username": "${MYSQLDB_USER}",
+        "spring.datasource.password": "${MYSQLDB_ROOT_PASSWORD}",
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQLDialect",
+        "spring.jpa.hibernate.ddl-auto": "update"
+      }'
+    stdin_open: true
+    tty: true
 
-# Étape 4 : Commande à exécuter lorsque le conteneur démarre
-ENTRYPOINT ["java", "-jar", "app.jar"]
+volumes:
+  db: {}
