@@ -22,7 +22,7 @@ services:
   app:
     depends_on:
       - mysqldb # Attend que MySQL soit démarré
-    image: hadilibnhajfraj/backend-spring:1.0.0 # Assurez-vous que cette image existe
+    image: wajdi1/backend-spring:1.0.0 # Assurez-vous que cette image existe
     # Utiliser la section "build" si vous souhaitez construire localement :
     # build:
     #   context: ./path-to-spring-backend
